@@ -1,4 +1,5 @@
 import 'package:crypto_app/common/failures.dart';
+import 'package:crypto_app/features/contentful/presentation/widgets/banner_list_item.dart';
 import 'package:crypto_app/features/overview/domain/entity/crypto_entity.dart';
 import 'package:crypto_app/features/overview/presentation/crypto_notifier.dart';
 import 'package:crypto_app/features/overview/presentation/widgets/crypto_list_tile.dart';
@@ -43,6 +44,12 @@ class OverviewPage extends ConsumerWidget {
                     shrinkWrap: true,
                     itemCount: cryptoEntityList.length,
                     itemBuilder: (context, index) {
+                      if (index == 3) {
+                        return const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          child: BannerListItem(),
+                        );
+                      }
                       return CryptoListTile(
                         key: ValueKey(cryptoEntityList[index].id),
                         name: cryptoEntityList[index].name,

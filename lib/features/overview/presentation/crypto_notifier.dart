@@ -3,7 +3,6 @@ import 'package:crypto_app/features/overview/domain/usecase/get_crypto_by_name_u
 import 'package:crypto_app/features/overview/domain/usecase/get_crypto_list_usecase.dart';
 import 'package:crypto_app/features/overview/presentation/crypto_state.dart';
 import 'package:crypto_app/injection.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 enum SortOptions { MarketCap, Price, Volume, ChangePercent }
@@ -58,7 +57,6 @@ class CryptoNotifier extends StateNotifier<CryptoState> {
   }
 
   sortCryptoList(SortOptions sortOption, bool changedOption) {
-    debugPrint(changedOption.toString());
     List<CryptoEntity> cryptoEntityListCopy =
         List.from(state.cryptoEntityList!);
 

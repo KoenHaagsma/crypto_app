@@ -1,3 +1,8 @@
+import 'package:crypto_app/features/contentful/data/api/contentful_api.dart';
+import 'package:crypto_app/features/contentful/data/repository/contentful_repository_impl.dart';
+import 'package:crypto_app/features/contentful/domain/repository/contentful_repository.dart';
+import 'package:crypto_app/features/contentful/domain/usecase/get_banner_list_usecase.dart';
+import 'package:crypto_app/features/contentful/presentation/contentful_notifier.dart';
 import 'package:crypto_app/features/overview/data/api/crypto_api.dart';
 import 'package:crypto_app/features/overview/data/repository/crypto_repository_impl.dart';
 import 'package:crypto_app/features/overview/domain/repository/crypto_repository.dart';
@@ -15,10 +20,12 @@ Future<void> init() async {
         getCryptoUseCase: sl(),
         getCryptoListUseCase: sl(),
       ));
+  sl.registerFactory(() => ContentfulNotifier(getBannerListUseCase: sl()));
 
   // Domain
   sl.registerFactory(() => GetCryptoByNameUseCase(cryptoRepository: sl()));
   sl.registerFactory(() => GetCryptoListUseCase(cryptoRepository: sl()));
+  sl.registerFactory(() => GetBannerListUseCase(contentfulRepository: sl()));
 
   // Data
   sl.registerFactory<CryptoRepository>(
@@ -32,6 +39,24 @@ Future<void> init() async {
           receiveDataWhenStatusError: true,
           headers: {
             'Content-Type': 'application/json',
+          },
+        ),
+      ),
+    ),
+  );
+
+  sl.registerFactory<ContentfulRepository>(
+      () => ContentfulRepositoryImpl(contentfulApi: sl()));
+
+  sl.registerFactory<ContentfulApi>(
+    () => ContentfulApiImpl(
+      dio: Dio(
+        BaseOptions(
+          baseUrl: 'https://cdn.contentful.com',
+          receiveDataWhenStatusError: true,
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Contentful-RateLimit-Reset': 1
           },
         ),
       ),
