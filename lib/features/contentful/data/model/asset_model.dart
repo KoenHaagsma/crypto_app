@@ -15,7 +15,7 @@ class AssetModel extends AssetEntity {
     return AssetModel(
       id: json['metadata']['id'],
       title: json['fields']['title'],
-      url: json['fields']['file']['url'],
+      url: 'https:${json['fields']['file']['url']}',
     );
   }
 }

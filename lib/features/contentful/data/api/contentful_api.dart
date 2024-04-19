@@ -1,7 +1,6 @@
 import 'package:crypto_app/features/contentful/data/model/asset_model.dart';
 import 'package:crypto_app/features/contentful/data/model/banner_model.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
 abstract class ContentfulApi {
   Future<List<BannerModal>> getBannerList();
@@ -10,6 +9,7 @@ abstract class ContentfulApi {
 
 class ContentfulApiImpl implements ContentfulApi {
   final Dio dio;
+  final String tempLocale = 'nl';
 
   ContentfulApiImpl({required this.dio});
 
@@ -18,12 +18,11 @@ class ContentfulApiImpl implements ContentfulApi {
     try {
       Response response;
       response = await dio.get(
-          '/spaces/wb1nctoytp0e/environments/master/entries?access_token=UxMFzJNyz02okuSVTgYhArl1iASyNZweb_J42jPHgEM&content_type=banner');
+          '/spaces/wb1nctoytp0e/environments/master/entries?access_token=UxMFzJNyz02okuSVTgYhArl1iASyNZweb_J42jPHgEM&content_type=banner&locale=$tempLocale');
 
       if (response.statusCode != 200) {
         throw Exception('Failed to load data');
       } else {
-        debugPrint(response.data['items'].toString());
         AssetModel bannerAsset = await getAsset(
             response.data['items'][0]['fields']['bannerImage']['sys']['id']);
         return (response.data['items'] as List)
@@ -40,7 +39,7 @@ class ContentfulApiImpl implements ContentfulApi {
     try {
       Response response;
       response = await dio.get(
-          '/spaces/wb1nctoytp0e/environments/master/assets/$id?access_token=UxMFzJNyz02okuSVTgYhArl1iASyNZweb_J42jPHgEM');
+          '/spaces/wb1nctoytp0e/environments/master/assets/$id?access_token=UxMFzJNyz02okuSVTgYhArl1iASyNZweb_J42jPHgEM&locale=$tempLocale');
 
       if (response.statusCode != 200) {
         throw Exception('Failed to load data');

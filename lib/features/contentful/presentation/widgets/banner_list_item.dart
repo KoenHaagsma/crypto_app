@@ -31,9 +31,10 @@ class BannerListItem extends ConsumerWidget {
           borderRadius: BorderRadius.circular(8),
           color: Colors.white12,
         ),
-        child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-            child: Image.network(bannerList[0].assetUrl!)),
+        child: Image.network(
+          bannerList[0].assetUrl!,
+          fit: BoxFit.cover,
+        ),
       );
     }
 

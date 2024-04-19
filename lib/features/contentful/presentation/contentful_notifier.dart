@@ -6,7 +6,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class ContentfulNotifier extends StateNotifier<ContentfulState> {
   ContentfulNotifier({
     required this.getBannerListUseCase,
-  }) : super(const ContentfulState()) {
+  }) : super(
+          const ContentfulState(),
+        ) {
     getBannerList();
   }
 

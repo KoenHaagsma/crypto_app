@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class FilterList extends ConsumerStatefulWidget {
-  const FilterList({super.key});
+  const FilterList({
+    super.key,
+    required this.scrollController,
+  });
+
+  final ScrollController scrollController;
 
   @override
   FilterListState createState() => FilterListState();
@@ -12,6 +17,11 @@ class FilterList extends ConsumerStatefulWidget {
 class FilterListState extends ConsumerState<FilterList> {
   onSortOptionSelected(SortOptions sortOption, bool changedOption) {
     ref.read(cryptoProvider.notifier).sortCryptoList(sortOption, changedOption);
+    widget.scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.easeInOut,
+    );
   }
 
   @override
