@@ -17,8 +17,11 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$CryptoState {
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get chartIsLoading => throw _privateConstructorUsedError;
   CryptoEntity? get cryptoEntity => throw _privateConstructorUsedError;
   List<CryptoEntity>? get cryptoEntityList =>
+      throw _privateConstructorUsedError;
+  List<CryptoHistoryEntity>? get cryptoHistoryEntityList =>
       throw _privateConstructorUsedError;
   SortOptions get sortOption => throw _privateConstructorUsedError;
   SortDirection get sortDirection => throw _privateConstructorUsedError;
@@ -37,8 +40,10 @@ abstract class $CryptoStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
+      bool chartIsLoading,
       CryptoEntity? cryptoEntity,
       List<CryptoEntity>? cryptoEntityList,
+      List<CryptoHistoryEntity>? cryptoHistoryEntityList,
       SortOptions sortOption,
       SortDirection sortDirection,
       Failure? failure});
@@ -58,8 +63,10 @@ class _$CryptoStateCopyWithImpl<$Res, $Val extends CryptoState>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? chartIsLoading = null,
     Object? cryptoEntity = freezed,
     Object? cryptoEntityList = freezed,
+    Object? cryptoHistoryEntityList = freezed,
     Object? sortOption = null,
     Object? sortDirection = null,
     Object? failure = freezed,
@@ -69,6 +76,10 @@ class _$CryptoStateCopyWithImpl<$Res, $Val extends CryptoState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      chartIsLoading: null == chartIsLoading
+          ? _value.chartIsLoading
+          : chartIsLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       cryptoEntity: freezed == cryptoEntity
           ? _value.cryptoEntity
           : cryptoEntity // ignore: cast_nullable_to_non_nullable
@@ -77,6 +88,10 @@ class _$CryptoStateCopyWithImpl<$Res, $Val extends CryptoState>
           ? _value.cryptoEntityList
           : cryptoEntityList // ignore: cast_nullable_to_non_nullable
               as List<CryptoEntity>?,
+      cryptoHistoryEntityList: freezed == cryptoHistoryEntityList
+          ? _value.cryptoHistoryEntityList
+          : cryptoHistoryEntityList // ignore: cast_nullable_to_non_nullable
+              as List<CryptoHistoryEntity>?,
       sortOption: null == sortOption
           ? _value.sortOption
           : sortOption // ignore: cast_nullable_to_non_nullable
@@ -103,8 +118,10 @@ abstract class _$$CryptoStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
+      bool chartIsLoading,
       CryptoEntity? cryptoEntity,
       List<CryptoEntity>? cryptoEntityList,
+      List<CryptoHistoryEntity>? cryptoHistoryEntityList,
       SortOptions sortOption,
       SortDirection sortDirection,
       Failure? failure});
@@ -122,8 +139,10 @@ class __$$CryptoStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? chartIsLoading = null,
     Object? cryptoEntity = freezed,
     Object? cryptoEntityList = freezed,
+    Object? cryptoHistoryEntityList = freezed,
     Object? sortOption = null,
     Object? sortDirection = null,
     Object? failure = freezed,
@@ -133,6 +152,10 @@ class __$$CryptoStateImplCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      chartIsLoading: null == chartIsLoading
+          ? _value.chartIsLoading
+          : chartIsLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       cryptoEntity: freezed == cryptoEntity
           ? _value.cryptoEntity
           : cryptoEntity // ignore: cast_nullable_to_non_nullable
@@ -141,6 +164,10 @@ class __$$CryptoStateImplCopyWithImpl<$Res>
           ? _value._cryptoEntityList
           : cryptoEntityList // ignore: cast_nullable_to_non_nullable
               as List<CryptoEntity>?,
+      cryptoHistoryEntityList: freezed == cryptoHistoryEntityList
+          ? _value._cryptoHistoryEntityList
+          : cryptoHistoryEntityList // ignore: cast_nullable_to_non_nullable
+              as List<CryptoHistoryEntity>?,
       sortOption: null == sortOption
           ? _value.sortOption
           : sortOption // ignore: cast_nullable_to_non_nullable
@@ -162,17 +189,23 @@ class __$$CryptoStateImplCopyWithImpl<$Res>
 class _$CryptoStateImpl extends _CryptoState {
   const _$CryptoStateImpl(
       {this.isLoading = true,
+      this.chartIsLoading = true,
       this.cryptoEntity,
       final List<CryptoEntity>? cryptoEntityList = const [],
+      final List<CryptoHistoryEntity>? cryptoHistoryEntityList = const [],
       this.sortOption = SortOptions.MarketCap,
       this.sortDirection = SortDirection.Descending,
       this.failure})
       : _cryptoEntityList = cryptoEntityList,
+        _cryptoHistoryEntityList = cryptoHistoryEntityList,
         super._();
 
   @override
   @JsonKey()
   final bool isLoading;
+  @override
+  @JsonKey()
+  final bool chartIsLoading;
   @override
   final CryptoEntity? cryptoEntity;
   final List<CryptoEntity>? _cryptoEntityList;
@@ -183,6 +216,18 @@ class _$CryptoStateImpl extends _CryptoState {
     if (value == null) return null;
     if (_cryptoEntityList is EqualUnmodifiableListView)
       return _cryptoEntityList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<CryptoHistoryEntity>? _cryptoHistoryEntityList;
+  @override
+  @JsonKey()
+  List<CryptoHistoryEntity>? get cryptoHistoryEntityList {
+    final value = _cryptoHistoryEntityList;
+    if (value == null) return null;
+    if (_cryptoHistoryEntityList is EqualUnmodifiableListView)
+      return _cryptoHistoryEntityList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -198,7 +243,7 @@ class _$CryptoStateImpl extends _CryptoState {
 
   @override
   String toString() {
-    return 'CryptoState(isLoading: $isLoading, cryptoEntity: $cryptoEntity, cryptoEntityList: $cryptoEntityList, sortOption: $sortOption, sortDirection: $sortDirection, failure: $failure)';
+    return 'CryptoState(isLoading: $isLoading, chartIsLoading: $chartIsLoading, cryptoEntity: $cryptoEntity, cryptoEntityList: $cryptoEntityList, cryptoHistoryEntityList: $cryptoHistoryEntityList, sortOption: $sortOption, sortDirection: $sortDirection, failure: $failure)';
   }
 
   @override
@@ -208,10 +253,14 @@ class _$CryptoStateImpl extends _CryptoState {
             other is _$CryptoStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.chartIsLoading, chartIsLoading) ||
+                other.chartIsLoading == chartIsLoading) &&
             (identical(other.cryptoEntity, cryptoEntity) ||
                 other.cryptoEntity == cryptoEntity) &&
             const DeepCollectionEquality()
                 .equals(other._cryptoEntityList, _cryptoEntityList) &&
+            const DeepCollectionEquality().equals(
+                other._cryptoHistoryEntityList, _cryptoHistoryEntityList) &&
             (identical(other.sortOption, sortOption) ||
                 other.sortOption == sortOption) &&
             (identical(other.sortDirection, sortDirection) ||
@@ -223,8 +272,10 @@ class _$CryptoStateImpl extends _CryptoState {
   int get hashCode => Object.hash(
       runtimeType,
       isLoading,
+      chartIsLoading,
       cryptoEntity,
       const DeepCollectionEquality().hash(_cryptoEntityList),
+      const DeepCollectionEquality().hash(_cryptoHistoryEntityList),
       sortOption,
       sortDirection,
       failure);
@@ -239,8 +290,10 @@ class _$CryptoStateImpl extends _CryptoState {
 abstract class _CryptoState extends CryptoState {
   const factory _CryptoState(
       {final bool isLoading,
+      final bool chartIsLoading,
       final CryptoEntity? cryptoEntity,
       final List<CryptoEntity>? cryptoEntityList,
+      final List<CryptoHistoryEntity>? cryptoHistoryEntityList,
       final SortOptions sortOption,
       final SortDirection sortDirection,
       final Failure? failure}) = _$CryptoStateImpl;
@@ -249,9 +302,13 @@ abstract class _CryptoState extends CryptoState {
   @override
   bool get isLoading;
   @override
+  bool get chartIsLoading;
+  @override
   CryptoEntity? get cryptoEntity;
   @override
   List<CryptoEntity>? get cryptoEntityList;
+  @override
+  List<CryptoHistoryEntity>? get cryptoHistoryEntityList;
   @override
   SortOptions get sortOption;
   @override

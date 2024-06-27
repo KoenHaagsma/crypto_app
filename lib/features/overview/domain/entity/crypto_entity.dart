@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 @immutable
 class CryptoEntity {
   final String? id;
+  final int? rank;
   final String? name;
   final String? symbol;
   final double? value;
@@ -13,6 +14,7 @@ class CryptoEntity {
 
   const CryptoEntity({
     this.id,
+    this.rank,
     this.name,
     this.symbol,
     this.value,
@@ -28,6 +30,7 @@ class CryptoEntity {
 
     return other is CryptoEntity &&
         other.id == id &&
+        other.rank == rank &&
         other.name == name &&
         other.symbol == symbol &&
         other.value == value &&
@@ -35,5 +38,5 @@ class CryptoEntity {
   }
 
   @override
-  List<Object?> get props => [id, name, symbol, value, image];
+  List<Object?> get props => [id, rank, name, symbol, value, image];
 }

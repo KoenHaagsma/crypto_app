@@ -1,5 +1,6 @@
 import 'package:crypto_app/features/overview/domain/entity/crypto_entity.dart';
 import 'package:crypto_app/features/overview/domain/usecase/get_crypto_by_name_usecase.dart';
+import 'package:crypto_app/features/overview/domain/usecase/get_crypto_history_by_name_and_interval_usecase.dart';
 import 'package:crypto_app/features/overview/domain/usecase/get_crypto_list_usecase.dart';
 import 'package:crypto_app/features/overview/presentation/crypto_state.dart';
 import 'package:crypto_app/injection.dart';
@@ -16,6 +17,7 @@ class CryptoNotifier extends StateNotifier<CryptoState> {
   CryptoNotifier({
     required this.getCryptoUseCase,
     required this.getCryptoListUseCase,
+    required this.getCryptoHistoryUseCase,
   }) : super(const CryptoState(
           cryptoEntity: CryptoEntity(),
         )) {
@@ -25,9 +27,10 @@ class CryptoNotifier extends StateNotifier<CryptoState> {
 
   final GetCryptoByNameUseCase getCryptoUseCase;
   final GetCryptoListUseCase getCryptoListUseCase;
+  final GetCryptoHistoryByNameAndIntervalUseCase getCryptoHistoryUseCase;
 
   getCryptoByName(String name) async {
-    state = state.copyWith(isLoading: true);
+    state = state.copyWith(isLoading: false);
 
     final result = await getCryptoUseCase.call(name);
 
@@ -37,6 +40,22 @@ class CryptoNotifier extends StateNotifier<CryptoState> {
       },
       (success) {
         state = state.copyWith(cryptoEntity: success, isLoading: false);
+      },
+    );
+  }
+
+  getCryptoByHistoryAndInterval(String name, String interval) async {
+    state = state.copyWith(chartIsLoading: true);
+
+    final result = await getCryptoHistoryUseCase.call(name, interval);
+
+    result.fold(
+      (failure) {
+        state = state.copyWith(failure: failure, chartIsLoading: false);
+      },
+      (success) {
+        state = state.copyWith(
+            cryptoHistoryEntityList: success, chartIsLoading: false);
       },
     );
   }

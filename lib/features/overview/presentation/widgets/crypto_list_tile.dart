@@ -1,3 +1,5 @@
+import 'package:crypto_app/features/overview/presentation/crypto_notifier.dart';
+import 'package:crypto_app/features/overview/presentation/widgets/crypto_value.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -23,8 +25,15 @@ class CryptoListTile extends ConsumerStatefulWidget {
 }
 
 class _CryptoListTileState extends ConsumerState<CryptoListTile> {
-  onTileClicked() {
-    // ref.read(cryptoProvider.notifier).setSelectedCrypto(widget.name!);
+  onTileClicked() async {
+    await ref
+        .read(cryptoProvider.notifier)
+        .getCryptoByName(widget.name!.toLowerCase());
+    await ref.read(cryptoProvider.notifier).getCryptoByHistoryAndInterval(
+          widget.name!.toLowerCase(),
+          'd1',
+        );
+    if (!mounted) return;
     context.go('/crypto/${widget.name}', extra: (
       widget.name,
       widget.symbol,
@@ -73,13 +82,7 @@ class _CryptoListTileState extends ConsumerState<CryptoListTile> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(
-                  '\$${widget.value! >= 9.9 ? widget.value!.toStringAsFixed(2) : widget.value!.toStringAsFixed(6)}',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                  ),
-                ),
+                CryptoValue(value: widget.value!),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [

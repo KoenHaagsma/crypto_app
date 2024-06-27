@@ -1,12 +1,10 @@
 import 'package:crypto_app/common/failures.dart';
-import 'package:crypto_app/features/contentful/presentation/contentful_notifier.dart';
 import 'package:crypto_app/features/contentful/presentation/widgets/banner_list_item.dart';
 import 'package:crypto_app/features/overview/domain/entity/crypto_entity.dart';
 import 'package:crypto_app/features/overview/presentation/crypto_notifier.dart';
 import 'package:crypto_app/features/overview/presentation/widgets/crypto_list_tile.dart';
 import 'package:crypto_app/features/overview/presentation/widgets/filter_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class OverviewPage extends ConsumerWidget {
@@ -27,13 +25,10 @@ class OverviewPage extends ConsumerWidget {
       body: Column(
         children: [
           const SizedBox(height: 16),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: SizedBox(
-              height: 93,
-              child: FilterList(
-                scrollController: scrollController,
-              ),
+          SizedBox(
+            height: 93,
+            child: FilterList(
+              scrollController: scrollController,
             ),
           ),
           Expanded(

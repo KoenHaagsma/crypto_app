@@ -7,6 +7,7 @@ import 'package:crypto_app/features/overview/data/api/crypto_api.dart';
 import 'package:crypto_app/features/overview/data/repository/crypto_repository_impl.dart';
 import 'package:crypto_app/features/overview/domain/repository/crypto_repository.dart';
 import 'package:crypto_app/features/overview/domain/usecase/get_crypto_by_name_usecase.dart';
+import 'package:crypto_app/features/overview/domain/usecase/get_crypto_history_by_name_and_interval_usecase.dart';
 import 'package:crypto_app/features/overview/domain/usecase/get_crypto_list_usecase.dart';
 import 'package:crypto_app/features/overview/presentation/crypto_notifier.dart';
 import 'package:dio/dio.dart';
@@ -19,12 +20,15 @@ Future<void> init() async {
   sl.registerFactory(() => CryptoNotifier(
         getCryptoUseCase: sl(),
         getCryptoListUseCase: sl(),
+        getCryptoHistoryUseCase: sl(),
       ));
   sl.registerFactory(() => ContentfulNotifier(getBannerListUseCase: sl()));
 
   // Domain
   sl.registerFactory(() => GetCryptoByNameUseCase(cryptoRepository: sl()));
   sl.registerFactory(() => GetCryptoListUseCase(cryptoRepository: sl()));
+  sl.registerFactory(
+      () => GetCryptoHistoryByNameAndIntervalUseCase(cryptoRepository: sl()));
   sl.registerFactory(() => GetBannerListUseCase(contentfulRepository: sl()));
 
   // Data

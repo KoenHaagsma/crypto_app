@@ -1,3 +1,4 @@
+import 'package:crypto_app/features/overview/domain/entity/crypto_history_entity.dart';
 import 'package:dartz/dartz.dart';
 
 import 'package:crypto_app/common/failures.dart';
@@ -14,6 +15,17 @@ class CryptoRepositoryImpl implements CryptoRepository {
   Future<Either<Failure, CryptoEntity>> getCurrency(String name) async {
     try {
       final result = await cryptoApi.getCurrency(name);
+      return right(result);
+    } on Exception catch (_) {
+      return left(UnexpectedFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<CryptoHistoryEntity>>> getCurrencyChart(
+      String name, String interval) async {
+    try {
+      final result = await cryptoApi.getCurrencyChart(name, interval);
       return right(result);
     } on Exception catch (_) {
       return left(UnexpectedFailure());

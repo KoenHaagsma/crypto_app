@@ -3,6 +3,7 @@ import 'package:crypto_app/features/overview/domain/entity/crypto_entity.dart';
 class CryptoModel extends CryptoEntity {
   CryptoModel({
     String? id,
+    String? rank,
     String? name,
     String? symbol,
     String? value,
@@ -12,6 +13,7 @@ class CryptoModel extends CryptoEntity {
     String? changePercent,
   }) : super(
           id: id,
+          rank: int.parse(rank!),
           name: name,
           symbol: symbol,
           value: double.parse(value!),
@@ -25,6 +27,7 @@ class CryptoModel extends CryptoEntity {
   factory CryptoModel.fromJson(Map<String, dynamic> json) {
     return CryptoModel(
       id: json['id'],
+      rank: json['rank'],
       name: json['name'],
       symbol: json['symbol'],
       value: json['priceUsd'],
